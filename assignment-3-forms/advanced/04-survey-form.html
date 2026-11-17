@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Q4 - Survey Form</title>
+</head>
+<body>
+<!--
+  Question 4 (advanced): Build a survey form with a mix of text, radio, checkbox, dropdown, and textarea inputs.
+-->
+<h2>Customer Survey</h2>
+<form action="#" method="post">
+  <label for="name">Your Name:</label><br>
+  <input type="text" id="name" name="name"><br><br>
+
+  <p>How satisfied are you?</p>
+  <input type="radio" id="s1" name="satisfaction" value="happy"><label for="s1">Happy</label>
+  <input type="radio" id="s2" name="satisfaction" value="neutral"><label for="s2">Neutral</label>
+  <input type="radio" id="s3" name="satisfaction" value="unhappy"><label for="s3">Unhappy</label><br><br>
+
+  <p>Which features do you use?</p>
+  <input type="checkbox" id="f1" name="features" value="search"><label for="f1">Search</label>
+  <input type="checkbox" id="f2" name="features" value="reports"><label for="f2">Reports</label>
+  <input type="checkbox" id="f3" name="features" value="chat"><label for="f3">Chat</label><br><br>
+
+  <label for="freq">How often do you use our product?</label>
+  <select id="freq" name="frequency">
+    <option>Daily</option><option>Weekly</option><option>Monthly</option><option>Rarely</option>
+  </select><br><br>
+
+  <label for="sugg">Suggestions:</label><br>
+  <textarea id="sugg" name="suggestions" rows="4" cols="40"></textarea><br><br>
+
+  <input type="submit" value="Submit Survey">
+</form>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intermediate Q9 - Terms Disable Submit</title>
+</head>
+<body>
+<!--
+  Question 9 (intermediate): Create a form that disables the submit button until terms & conditions are checked.
+-->
+<form action="#" method="post">
+  <input type="checkbox" id="terms" name="terms">
+  <label for="terms">I agree to the Terms &amp; Conditions</label><br><br>
+  <input type="submit" id="submitBtn" value="Submit" disabled>
+</form>
+<script>
+  const terms = document.getElementById("terms");
+  const btn = document.getElementById("submitBtn");
+  terms.addEventListener("change", () => { btn.disabled = !terms.checked; });
+</script>
+</body>
+</html>

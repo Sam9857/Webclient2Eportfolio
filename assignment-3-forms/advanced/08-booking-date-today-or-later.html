@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Q8 - Booking Date Today Or Later</title>
+</head>
+<body>
+<!--
+  Question 8 (advanced): Create a form where the date input must be today or later (for booking purposes).
+-->
+<form action="#" method="post">
+  <label for="bdate">Booking Date:</label>
+  <input type="date" id="bdate" name="bookingDate" required>
+  <input type="submit" value="Book Now">
+</form>
+<script>
+  // set min to today's date (YYYY-MM-DD, local time)
+  const t = new Date();
+  const today = new Date(t.getTime() - t.getTimezoneOffset() * 60000).toISOString().split("T")[0];
+  document.getElementById("bdate").setAttribute("min", today);
+</script>
+</body>
+</html>

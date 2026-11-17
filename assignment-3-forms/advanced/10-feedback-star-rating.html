@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Q10 - Feedback Star Rating</title>
+  <style>
+    /* Reverse order + sibling selector lets hover/checked fill stars to the left */
+    .stars { display: inline-flex; flex-direction: row-reverse; }
+    .stars input { display: none; }
+    .stars label { font-size: 2rem; color: #ccc; cursor: pointer; }
+    .stars input:checked ~ label,
+    .stars label:hover,
+    .stars label:hover ~ label { color: gold; }
+  </style>
+</head>
+<body>
+<!--
+  Question 10 (advanced): Create a feedback form that includes star rating (radio buttons), comment box, and submit.
+-->
+<h2>Feedback Form</h2>
+<form action="#" method="post">
+  <p>Your Rating:</p>
+  <div class="stars">
+    <input type="radio" id="s5" name="rating" value="5" required><label for="s5" title="5 stars">&#9733;</label>
+    <input type="radio" id="s4" name="rating" value="4"><label for="s4" title="4 stars">&#9733;</label>
+    <input type="radio" id="s3" name="rating" value="3"><label for="s3" title="3 stars">&#9733;</label>
+    <input type="radio" id="s2" name="rating" value="2"><label for="s2" title="2 stars">&#9733;</label>
+    <input type="radio" id="s1" name="rating" value="1"><label for="s1" title="1 star">&#9733;</label>
+  </div>
+  <label for="comment">Comments:</label><br>
+  <textarea id="comment" name="comment" rows="4" cols="40"></textarea><br><br>
+  <input type="submit" value="Submit Feedback">
+</form>
+</body>
+</html>

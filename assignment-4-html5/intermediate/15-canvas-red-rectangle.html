@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intermediate Q15 - Canvas Red Rectangle</title>
+</head>
+<body>
+<!--
+  Question 15 (intermediate): Make a canvas with a red filled rectangle using JavaScript.
+-->
+<canvas id="c" width="300" height="200" style="border:1px solid #000"></canvas>
+<script>
+  const ctx = document.getElementById("c").getContext("2d");
+  ctx.fillStyle = "red";
+  ctx.fillRect(50, 40, 200, 120);
+</script>
+</body>
+</html>
