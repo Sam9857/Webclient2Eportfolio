@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intermediate Q18 - Canvas Multiple Shapes</title>
+</head>
+<body>
+<!--
+  Question 18 (intermediate): Display multiple shapes (circle, rectangle, line) inside a single <canvas>.
+-->
+<canvas id="c" width="400" height="250" style="border:1px solid #000"></canvas>
+<script>
+  const ctx = document.getElementById("c").getContext("2d");
+
+  // Rectangle
+  ctx.fillStyle = "orange";
+  ctx.fillRect(30, 30, 120, 80);
+
+  // Circle
+  ctx.beginPath();
+  ctx.arc(280, 80, 50, 0, 2 * Math.PI);
+  ctx.fillStyle = "teal";
+  ctx.fill();
+
+  // Line
+  ctx.beginPath();
+  ctx.moveTo(30, 200);
+  ctx.lineTo(370, 200);
+  ctx.lineWidth = 4;
+  ctx.strokeStyle = "purple";
+  ctx.stroke();
+</script>
+</body>
+</html>

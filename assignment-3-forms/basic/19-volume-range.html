@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basic Q19 - Volume Range</title>
+</head>
+<body>
+<!--
+  Question 19 (basic): Create a range input for selecting volume level (1-100).
+-->
+<form action="#" method="post">
+  <label for="vol">Volume:</label>
+  <input type="range" id="vol" name="volume" min="1" max="100" value="50"
+         oninput="out.value = this.value">
+  <output id="out">50</output>
+</form>
+</body>
+</html>

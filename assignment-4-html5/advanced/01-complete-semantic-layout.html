@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Q1 - Complete Semantic Layout</title>
+  <style>
+    body { margin: 0; }
+    header, footer { background: #2c3e50; color: #fff; padding: 12px 20px; }
+    header nav ul { list-style: none; display: flex; gap: 20px; padding: 0; margin: 8px 0 0; }
+    header nav a { color: #fff; text-decoration: none; }
+    .container { display: flex; gap: 20px; padding: 20px; }
+    main { flex: 3; }
+    aside { flex: 1; background: #f1f3f5; padding: 12px; border-radius: 6px; }
+    article { border-bottom: 1px solid #ddd; margin-bottom: 16px; padding-bottom: 8px; }
+    footer { text-align: center; }
+  </style>
+</head>
+<body>
+<!--
+  Question 1 (advanced): Build a complete semantic webpage layout using <header>, <nav>, <main>, <article>, <aside>, <footer> with actual demo content.
+-->
+<header>
+  <h1>TechDaily</h1>
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Tech</a></li>
+      <li><a href="#">Science</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+<div class="container">
+  <main>
+    <article>
+      <h2>The Rise of Web Components</h2>
+      <p><time datetime="2025-08-20">20 August 2025</time> &mdash; by Jane Doe</p>
+      <p>Web Components let developers create reusable, encapsulated custom elements using standard browser APIs. They are supported in all major browsers.</p>
+    </article>
+    <article>
+      <h2>Why Semantic HTML Matters</h2>
+      <p>Semantic markup improves accessibility, SEO and maintainability by describing the meaning of content, not just its look.</p>
+    </article>
+  </main>
+  <aside>
+    <h3>Popular Posts</h3>
+    <ul>
+      <li><a href="#">10 CSS Tricks</a></li>
+      <li><a href="#">Intro to React</a></li>
+      <li><a href="#">Git for Beginners</a></li>
+    </ul>
+  </aside>
+</div>
+<footer><p>&copy; 2025 TechDaily. All rights reserved.</p></footer>
+</body>
+</html>

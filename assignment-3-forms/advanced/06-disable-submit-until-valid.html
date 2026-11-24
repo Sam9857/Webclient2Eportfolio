@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Q6 - Disable Submit Until Valid</title>
+</head>
+<body>
+<!--
+  Question 6 (advanced): Create a form that disables submit if required fields are empty.
+-->
+<form id="f" action="#" method="post">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" required><br><br>
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" required><br><br>
+  <label for="msg">Message:</label><br>
+  <textarea id="msg" name="message" required></textarea><br><br>
+  <input type="submit" id="btn" value="Submit" disabled>
+</form>
+<script>
+  const form = document.getElementById("f");
+  const btn = document.getElementById("btn");
+  // checkValidity() is true only when every required field is filled and valid
+  const update = () => { btn.disabled = !form.checkValidity(); };
+  form.addEventListener("input", update);
+  update();
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intermediate Q16 - Disabled Readonly</title>
+</head>
+<body>
+<!--
+  Question 16 (intermediate): Add a disabled input field in a form (show readonly behavior).
+-->
+<form action="#" method="post">
+  <label for="d">Disabled (cannot focus, NOT submitted):</label>
+  <input type="text" id="d" name="disabledField" value="Disabled value" disabled><br><br>
+  <label for="r">Readonly (focusable, IS submitted):</label>
+  <input type="text" id="r" name="readonlyField" value="Readonly value" readonly><br><br>
+  <input type="submit" value="Submit">
+</form>
+</body>
+</html>

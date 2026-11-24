@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Q8 - Canvas Bouncing Ball</title>
+</head>
+<body>
+<!--
+  Question 8 (advanced): Create a small bouncing ball animation using <canvas> and JavaScript.
+-->
+<canvas id="c" width="500" height="300" style="border:1px solid #000"></canvas>
+<script>
+  const canvas = document.getElementById("c");
+  const ctx = canvas.getContext("2d");
+
+  let x = 60, y = 60;      // position
+  let dx = 3, dy = 2.5;    // velocity
+  const r = 20;            // radius
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fillStyle = "tomato";
+    ctx.fill();
+
+    // bounce off walls
+    if (x + r > canvas.width || x - r < 0) dx = -dx;
+    if (y + r > canvas.height || y - r < 0) dy = -dy;
+
+    x += dx;
+    y += dy;
+    requestAnimationFrame(draw);
+  }
+  draw();
+</script>
+</body>
+</html>

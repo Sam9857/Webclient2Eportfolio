@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Q1 - Registration Form</title>
+</head>
+<body>
+<!--
+  Question 1 (advanced): Create a registration form with full validation (Name, Email, Password, Confirm Password, Gender, Country).
+-->
+<h2>Registration Form</h2>
+<form action="#" method="post" onsubmit="return validate()">
+  <label for="name">Name:</label><br>
+  <input type="text" id="name" name="name" minlength="3" required><br><br>
+
+  <label for="email">Email:</label><br>
+  <input type="email" id="email" name="email" required><br><br>
+
+  <label for="pw">Password:</label><br>
+  <input type="password" id="pw" name="password" minlength="8" required><br><br>
+
+  <label for="cpw">Confirm Password:</label><br>
+  <input type="password" id="cpw" name="confirm" required><br><br>
+
+  <p>Gender:</p>
+  <input type="radio" id="m" name="gender" value="male" required><label for="m">Male</label>
+  <input type="radio" id="f" name="gender" value="female"><label for="f">Female</label>
+  <input type="radio" id="o" name="gender" value="other"><label for="o">Other</label><br><br>
+
+  <label for="country">Country:</label>
+  <select id="country" name="country" required>
+    <option value="">-- Select --</option>
+    <option>India</option><option>USA</option><option>UK</option><option>Canada</option>
+  </select><br><br>
+
+  <input type="submit" value="Register">
+</form>
+<script>
+  function validate() {
+    if (document.getElementById("pw").value !== document.getElementById("cpw").value) {
+      alert("Passwords do not match!");
+      return false;
+    }
+    alert("Registration successful!");
+    return true;
+  }
+</script>
+</body>
+</html>

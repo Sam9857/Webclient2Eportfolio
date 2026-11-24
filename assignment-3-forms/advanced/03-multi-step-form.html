@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Q3 - Multi Step Form</title>
+  <style>
+    .step { display: none; }
+    .step.active { display: block; }
+  </style>
+</head>
+<body>
+<!--
+  Question 3 (advanced): Create a multi-step form: Step 1 (Personal Info), Step 2 (Contact Info), Step 3 (Submit).
+-->
+<form id="multiForm" action="#" method="post">
+  <div class="step active">
+    <h2>Step 1: Personal Info</h2>
+    <label>First Name: <input type="text" name="first" required></label><br><br>
+    <label>Last Name: <input type="text" name="last" required></label><br><br>
+    <label>Birthdate: <input type="date" name="dob" required></label><br><br>
+    <button type="button" onclick="nextStep()">Next</button>
+  </div>
+  <div class="step">
+    <h2>Step 2: Contact Info</h2>
+    <label>Email: <input type="email" name="email" required></label><br><br>
+    <label>Phone: <input type="tel" name="phone" pattern="[0-9]{10}" required></label><br><br>
+    <button type="button" onclick="prevStep()">Back</button>
+    <button type="button" onclick="nextStep()">Next</button>
+  </div>
+  <div class="step">
+    <h2>Step 3: Submit</h2>
+    <p>Review your details and submit the form.</p>
+    <button type="button" onclick="prevStep()">Back</button>
+    <button type="submit">Submit</button>
+  </div>
+</form>
+<script>
+  const steps = document.querySelectorAll(".step");
+  let current = 0;
+  function show(n) {
+    steps.forEach((s, i) => s.classList.toggle("active", i === n));
+  }
+  function nextStep() {
+    // validate only the visible step's fields before moving on
+    const fields = steps[current].querySelectorAll("input");
+    for (const f of fields) { if (!f.reportValidity()) return; }
+    if (current < steps.length - 1) show(++current);
+  }
+  function prevStep() { if (current > 0) show(--current); }
+</script>
+</body>
+</html>

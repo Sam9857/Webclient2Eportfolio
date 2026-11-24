@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Q7 - Canvas Linear Gradients</title>
+</head>
+<body>
+<!--
+  Question 7 (advanced): Use <canvas> to fill two rectangles with linear gradient colors.
+-->
+<canvas id="c" width="400" height="220" style="border:1px solid #000"></canvas>
+<script>
+  const ctx = document.getElementById("c").getContext("2d");
+
+  // Gradient 1: red -> yellow (horizontal)
+  const g1 = ctx.createLinearGradient(20, 0, 180, 0);
+  g1.addColorStop(0, "red");
+  g1.addColorStop(1, "yellow");
+  ctx.fillStyle = g1;
+  ctx.fillRect(20, 30, 160, 160);
+
+  // Gradient 2: blue -> green (horizontal)
+  const g2 = ctx.createLinearGradient(220, 0, 380, 0);
+  g2.addColorStop(0, "blue");
+  g2.addColorStop(1, "lime");
+  ctx.fillStyle = g2;
+  ctx.fillRect(220, 30, 160, 160);
+</script>
+</body>
+</html>
