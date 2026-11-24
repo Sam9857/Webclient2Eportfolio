@@ -1,0 +1,16 @@
+/* quiz.css - quiz.html only (the page where you answer questions) */
+
+.progress-box { position: sticky; top: 0; }
+.progress-box .row { display: flex; justify-content: space-between; margin-bottom: 8px; }
+
+.question-title { margin-bottom: 8px; font-size: 17px; font-weight: bold; }
+.question-title span { color: var(--main); }
+.question .badge { margin-bottom: 12px; }
+
+.option { display: block; padding: 10px 12px; margin-bottom: 8px; border: 1px solid var(--border); border-radius: 6px; font-weight: normal; cursor: pointer; }
+.option:hover { border-color: var(--main); }
+.option input { margin-right: 8px; }
+.letter { font-weight: bold; margin-right: 6px; }
+
+/* the chosen answer (main.js adds the class "selected") */
+.option.selected { border-color: var(--main); background: #eef2ff; }

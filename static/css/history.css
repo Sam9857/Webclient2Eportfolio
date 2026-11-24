@@ -1,0 +1,16 @@
+/* history.css - history.html only */
+
+.stats { display: flex; gap: 16px; margin-bottom: 20px; }
+.stat { flex: 1; padding: 16px; background: var(--white); border: 1px solid var(--border); border-radius: 8px; }
+.stat strong { display: block; font-size: 24px; }
+
+table { width: 100%; border-collapse: collapse; }
+th { padding: 8px; text-align: left; font-size: 13px; color: var(--grey); border-bottom: 1px solid var(--border); }
+td { padding: 10px 8px; border-bottom: 1px solid var(--border); }
+td.right { text-align: right; }
+.table-scroll { overflow-x: auto; }
+
+@media (max-width: 900px) {
+  .stats { display: block; }
+  .stat { margin-bottom: 12px; }
+}

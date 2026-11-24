@@ -1,0 +1,24 @@
+/* ats-report.css - ats_report.html only */
+
+.report-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.report-top form { display: inline; }
+.score-number { font-size: 44px; font-weight: bold; color: var(--main); }
+
+.two-columns { display: flex; gap: 20px; }
+.two-columns > .box { flex: 1; }
+
+.breakdown-row { margin-bottom: 14px; }
+.breakdown-row .row { display: flex; justify-content: space-between; margin-bottom: 4px; }
+
+.checks { list-style: none; padding: 0; margin: 0; }
+.checks li { margin-bottom: 8px; }
+.check-yes { color: var(--green); }
+.check-no { color: var(--red); }
+
+.keywords .badge { margin: 0 4px 6px 0; }
+.tips { padding-left: 20px; }
+.tips li { margin-bottom: 8px; }
+
+@media (max-width: 900px) {
+  .report-top, .two-columns { display: block; }
+}

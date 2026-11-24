@@ -1,0 +1,26 @@
+/* auth.css - two-column frame for login, register, forgot password, reset password */
+
+.auth-page { display: flex; min-height: 100vh; }
+
+.auth-left { width: 40%; padding: 40px; background: var(--main-dark); color: var(--white); }
+.auth-left h1 { font-size: 30px; margin-bottom: 20px; }
+.auth-left p { margin-bottom: 10px; }
+.logo { font-size: 22px; font-weight: bold; margin-bottom: 60px; }
+
+.auth-right { width: 60%; display: flex; align-items: center; justify-content: center; padding: 20px; }
+
+.auth-box { width: 100%; max-width: 420px; padding: 30px; background: var(--white); border: 1px solid var(--border); border-radius: 8px; }
+.auth-box h1 { font-size: 24px; }
+.subtitle { margin-bottom: 20px; color: var(--grey); }
+
+.forgot-link { text-align: right; margin-bottom: 16px; font-size: 14px; }
+.auth-footer { margin-top: 18px; text-align: center; font-size: 14px; color: var(--grey); }
+.reset-box { margin-top: 16px; padding: 12px; background: #ccfbf1; border-radius: 6px; font-size: 14px; word-break: break-word; }
+
+@media (max-width: 900px) {
+  .auth-page { display: block; }
+  .auth-left, .auth-right { width: 100%; }
+  .auth-left { padding: 20px; }
+  .logo { margin-bottom: 10px; }
+  .auth-left p { display: none; }
+}

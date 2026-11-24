@@ -1,0 +1,31 @@
+{# Fields shared by "new note" and "edit note". "note" exists only when editing. #}
+{% set current_color = note.color if note is defined else 'indigo' %}
+
+<div class="field">
+  <label for="title">Title</label>
+  <input id="title" name="title" type="text" maxlength="150" required value="{{ note.title if note is defined else '' }}" placeholder="e.g. Flask session vs cookies">
+</div>
+
+<div class="field">
+  <label for="content">Note</label>
+  <textarea id="content" name="content" rows="6" placeholder="Write what you want to remember...">{{ note.content if note is defined else '' }}</textarea>
+</div>
+
+<div class="two-fields">
+  <div class="field">
+    <label for="tag">Tag <span class="optional">(optional)</span></label>
+    <input id="tag" name="tag" type="text" maxlength="40" value="{{ (note.tag or '') if note is defined else '' }}" placeholder="e.g. Python">
+  </div>
+
+  <div class="field">
+    <span class="label">Colour</span>
+    <div class="swatches">
+      {% for c in colors %}
+      <label>
+        <input type="radio" name="color" value="{{ c }}" {{ 'checked' if c == current_color }}>
+        <span class="swatch-{{ c }}"></span>
+      </label>
+      {% endfor %}
+    </div>
+  </div>
+</div>

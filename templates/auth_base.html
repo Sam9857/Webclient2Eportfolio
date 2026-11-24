@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">{% endblock %}
+{# Two-column page for login, register, forgot and reset password #}
+{% block body %}
+<div class="auth-page">
+
+  <div class="auth-left">
+    <div class="logo">SkillCheck</div>
+    <h1>Know your resume.<br>Beat the interview.</h1>
+    <p>60 questions built around your skills</p>
+    <p>Free ATS score with fix-it tips</p>
+    <p>Notes that save what you learn</p>
+  </div>
+
+  <div class="auth-right">
+    <div class="auth-box">
+      <h1>{% block head_title %}{% endblock %}</h1>
+      <p class="subtitle">{% block head_sub %}{% endblock %}</p>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+          <div class="message message-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endwith %}
+
+      {% block form %}{% endblock %}
+    </div>
+  </div>
+
+</div>
+{% endblock %}

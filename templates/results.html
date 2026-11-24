@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+{% block title %}Results{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/results.css') }}">
+{% endblock %}
+{% block page_title %}Results{% endblock %}
+{% block page_sub %}{{ attempt.role }} &middot; {{ attempt.track }} track{% endblock %}
+
+{% block content %}
+
+<!-- score -->
+<div class="score-banner">
+  <div class="big-number">{{ attempt.pct }}%</div>
+  <p>{{ attempt.score }} / {{ attempt.total }} correct</p>
+  <p>{{ verdict }}</p>
+  <small>{{ attempt.created_at|fmt_date }}</small><br>
+  <a class="btn" href="{{ url_for('quiz_new') }}">Take another quiz</a>
+</div>
+
+<!-- score by topic -->
+<div class="box">
+  <h2>Score by topic</h2>
+  {% for c in categories %}
+  <div class="topic">
+    <div class="row"><strong>{{ c.name }}</strong><span>{{ c.right }}/{{ c.total }}</span></div>
+    <div class="bar"><div style="width: {{ c.pct }}%"></div></div>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- filter buttons -->
+<div class="filters">
+  <a href="{{ url_for('results', attempt_id=attempt.id) }}" class="{{ 'active' if not only_missed }}">All questions</a>
+  <a href="{{ url_for('results', attempt_id=attempt.id, filter='missed') }}" class="{{ 'active' if only_missed }}">Missed only</a>
+</div>
+
+<!-- every question with the right answer -->
+{% for q in shown %}
+<div class="box question {{ 'question-right' if q.is_correct else 'question-wrong' }}">
+  <p class="question-title">{{ q.question }}</p>
+  <span class="badge">{{ q.category }}</span>
+
+  {% for opt in q.options %}
+  {% set i = loop.index0 %}
+  <div class="option {{ 'correct' if i == q.correct_index else ('wrong' if i == q.selected_index else '') }}">
+    <span class="letter">{{ 'ABCD'[i] }}.</span> {{ opt }}
+    {% if i == q.correct_index %}<span class="tag">Correct</span>{% endif %}
+    {% if i == q.selected_index and i != q.correct_index %}<span class="tag">Your answer</span>{% endif %}
+  </div>
+  {% endfor %}
+
+  {% if q.selected_index is none %}<p class="not-answered">Not answered</p>{% endif %}
+
+  <div class="explanation">
+    <strong>Explanation</strong><br>{{ q.explanation }}
+  </div>
+
+  <form method="post" action="{{ url_for('note_from_question') }}">
+    <input type="hidden" name="question_id" value="{{ q.id }}">
+    <input type="hidden" name="attempt_id" value="{{ attempt.id }}">
+    <input type="hidden" name="filter" value="{{ 'missed' if only_missed }}">
+    <button type="submit" class="btn btn-small btn-light">Save to notes</button>
+  </form>
+</div>
+{% else %}
+<div class="box empty">No missed questions. Great work!</div>
+{% endfor %}
+
+{% endblock %}

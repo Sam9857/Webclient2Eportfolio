@@ -1,0 +1,19 @@
+/* note-edit.css - note_edit.html only */
+
+.edit-box { max-width: 700px; }
+
+.two-fields { display: flex; gap: 16px; }
+.two-fields .field { flex: 1; }
+.swatches label { display: inline-block; margin-right: 10px; cursor: pointer; }
+.swatches input { margin-right: 4px; }
+.swatches span { display: inline-block; width: 18px; height: 18px; border-radius: 50%; vertical-align: middle; }
+.swatch-indigo { background: #4f46e5; }
+.swatch-sky { background: #0284c7; }
+.swatch-teal { background: #0d9488; }
+.swatch-emerald { background: #16a34a; }
+.swatch-rose { background: #e11d48; }
+.swatch-violet { background: #7c3aed; }
+
+@media (max-width: 900px) {
+  .two-fields { display: block; }
+}

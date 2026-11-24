@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% block title %}ATS report{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/ats-report.css') }}">
+{% endblock %}
+{% block page_title %}ATS report{% endblock %}
+{% block page_sub %}{{ report.resume_name }} &middot; {{ report.role }}{% endblock %}
+
+{% block content %}
+
+<!-- score + buttons -->
+<div class="box report-top">
+  <div>
+    <div class="score-number">{{ d.score }}<small> / 100</small></div>
+    <h2>{{ d.label }}</h2>
+    <p class="small">{{ report.created_at|fmt_date }}</p>
+    <p class="small">Matched against {{ d.keyword_source }}</p>
+  </div>
+  <div>
+    <a class="btn btn-teal" href="{{ url_for('ats') }}">Check another resume</a>
+    <form method="post" action="{{ url_for('ats_delete', report_id=report.id) }}" data-confirm="Delete this report?">
+      <button class="btn btn-light" type="submit">Delete</button>
+    </form>
+  </div>
+</div>
+
+<div class="two-columns">
+  <!-- breakdown -->
+  <div class="box">
+    <h2>Score breakdown</h2>
+    {% for b in d.breakdown %}
+    <div class="breakdown-row">
+      <div class="row"><strong>{{ b.label }}</strong><span>{{ b.got }} / {{ b.max }}</span></div>
+      <div class="bar {{ 'bar-green' if b.got * 100 >= b.max * 70 else ('bar-blue' if b.got * 100 >= b.max * 40 else 'bar-red') }}">
+        <div style="width: {{ (b.got / b.max * 100)|round|int }}%"></div>
+      </div>
+      <small>{{ b.note }}</small>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- sections -->
+  <div class="box">
+    <h2>Sections found</h2>
+    <ul class="checks">
+      {% for name, ok in d.sections.items() %}
+      <li class="{{ 'check-yes' if ok else 'check-no' }}">{{ '&#10003;'|safe if ok else '&#10007;'|safe }} {{ name }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+<div class="two-columns">
+  <!-- keywords -->
+  <div class="box keywords">
+    <h2>Keywords</h2>
+    <p class="small">Found in your resume</p>
+    {% for k in d.matched %}<span class="badge badge-green">{{ k }}</span>{% else %}<small>None found</small>{% endfor %}
+
+    <p class="small" style="margin-top: 14px;">Missing</p>
+    {% for k in d.missing %}<span class="badge badge-red">{{ k }}</span>{% else %}<small>Nothing missing</small>{% endfor %}
+  </div>
+
+  <!-- tips -->
+  <div class="box">
+    <h2>How to improve</h2>
+    {% if d.tips %}
+    <ol class="tips">{% for t in d.tips %}<li>{{ t }}</li>{% endfor %}</ol>
+    {% else %}
+    <p class="small">Nothing to fix. Your resume looks ATS friendly.</p>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

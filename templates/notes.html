@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% block title %}My notes{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/notes.css') }}">
+{% endblock %}
+{% block page_title %}My notes{% endblock %}
+{% block page_sub %}Save what you learn and read it again{% endblock %}
+
+{% block content %}
+
+<!-- new note (click to open) -->
+<details class="box new-note" {{ 'open' if not notes and not q and not tag and not pinned_only }}>
+  <summary>+ New note</summary>
+  <form method="post" action="{{ url_for('note_create') }}">
+    {% include "_note_fields.html" %}
+    <button type="submit" class="btn">Save note</button>
+  </form>
+</details>
+
+<!-- search -->
+<form class="filter-bar" method="get" action="{{ url_for('notes') }}">
+  <input type="search" name="q" value="{{ q }}" placeholder="Search title or text">
+  <select name="tag">
+    <option value="">All tags</option>
+    {% for t in tags %}<option value="{{ t }}" {{ 'selected' if t == tag }}>{{ t }}</option>{% endfor %}
+  </select>
+  <label><input type="checkbox" name="pinned" value="1" {{ 'checked' if pinned_only }}> Pinned only</label>
+  <button class="btn btn-small" type="submit">Search</button>
+  {% if q or tag or pinned_only %}<a class="btn btn-small btn-light" href="{{ url_for('notes') }}">Clear</a>{% endif %}
+</form>
+
+<!-- notes -->
+{% if notes %}
+<div class="note-grid">
+  {% for n in notes %}
+  <div class="note note-{{ n.color }}">
+    <h2>{{ n.title }}{% if n.pinned %} <small>(pinned)</small>{% endif %}</h2>
+    {% if n.tag %}<span class="badge">{{ n.tag }}</span>{% endif %}
+    <p class="body">{{ n.content }}</p>
+
+    <div class="bottom">
+      <small>{{ n.updated_at|fmt_date }}</small>
+      <div>
+        <form method="post" action="{{ url_for('note_pin', note_id=n.id) }}">
+          <button class="btn btn-small btn-light">{{ 'Unpin' if n.pinned else 'Pin' }}</button>
+        </form>
+        <a class="btn btn-small btn-light" href="{{ url_for('note_edit', note_id=n.id) }}">Edit</a>
+        <form method="post" action="{{ url_for('note_delete', note_id=n.id) }}" data-confirm="Delete this note?">
+          <button class="btn btn-small btn-red">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<div class="box empty">{{ 'No notes match your search.' if (q or tag or pinned_only) else 'No notes yet. Write your first one above.' }}</div>
+{% endif %}
+
+{% endblock %}

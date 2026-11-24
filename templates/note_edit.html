@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block title %}Edit note{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/note-edit.css') }}">
+{% endblock %}
+{% block page_title %}Edit note{% endblock %}
+{% block page_sub %}Last updated {{ note.updated_at|fmt_date }}{% endblock %}
+
+{% block content %}
+<form class="box edit-box" method="post" action="{{ url_for('note_edit', note_id=note.id) }}">
+  {% include "_note_fields.html" %}
+  <button type="submit" class="btn">Save changes</button>
+  <a class="btn btn-light" href="{{ url_for('notes') }}">Cancel</a>
+</form>
+{% endblock %}

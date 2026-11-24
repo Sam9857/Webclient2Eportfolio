@@ -1,0 +1,20 @@
+/* quiz-setup.css - quiz_setup.html only */
+
+.setup-layout { display: flex; gap: 20px; align-items: flex-start; }
+.setup-layout form { flex: 1; }
+.setup-layout aside { width: 300px; }
+.setup-layout ol { padding-left: 20px; }
+.setup-layout li { margin-bottom: 8px; }
+
+.track-row { display: flex; gap: 12px; }
+.track { flex: 1; padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-weight: normal; cursor: pointer; }
+.track input { margin-right: 6px; }
+.track small { display: block; margin-left: 22px; }
+
+.chips label { display: inline-block; margin: 0 8px 8px 0; padding: 5px 12px; border: 1px solid var(--border); border-radius: 20px; font-weight: normal; cursor: pointer; }
+.chips input { margin-right: 4px; }
+
+@media (max-width: 900px) {
+  .setup-layout { display: block; }
+  .setup-layout aside { width: 100%; }
+}

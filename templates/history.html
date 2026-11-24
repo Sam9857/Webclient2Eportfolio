@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+{% block title %}History{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/history.css') }}">
+{% endblock %}
+{% block page_title %}History{% endblock %}
+{% block page_sub %}Every quiz and ATS report you have done{% endblock %}
+
+{% block content %}
+
+<!-- numbers at the top -->
+<div class="stats">
+  <div class="stat"><small>Quizzes taken</small><strong>{{ attempts|length }}</strong></div>
+  <div class="stat"><small>Best score</small><strong>{{ (best ~ '%') if best is not none else '--' }}</strong></div>
+  <div class="stat"><small>Average score</small><strong>{{ (average ~ '%') if average is not none else '--' }}</strong></div>
+  <div class="stat"><small>ATS reports</small><strong>{{ reports|length }}</strong></div>
+</div>
+
+<!-- quiz table -->
+<div class="box">
+  <h2>Quiz attempts</h2>
+  {% if attempts %}
+  <div class="table-scroll">
+    <table>
+      <tr><th>Date</th><th>Role</th><th>Track</th><th>Score</th><th></th></tr>
+      {% for a in attempts %}
+      <tr>
+        <td>{{ a.created_at|fmt_date }}</td>
+        <td>{{ a.role }}</td>
+        <td>{{ a.track|capitalize }}</td>
+        <td><span class="badge {{ 'badge-green' if a.pct >= 65 else ('badge-blue' if a.pct >= 40 else 'badge-red') }}">{{ a.score }}/{{ a.total }} &middot; {{ a.pct }}%</span></td>
+        <td class="right"><a class="btn btn-small btn-light" href="{{ url_for('results', attempt_id=a.id) }}">Review</a></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  {% else %}
+  <p class="empty">No quizzes yet. <a href="{{ url_for('quiz_new') }}">Take your first quiz</a>.</p>
+  {% endif %}
+</div>
+
+<!-- ATS table -->
+<div class="box">
+  <h2>ATS reports</h2>
+  {% if reports %}
+  <div class="table-scroll">
+    <table>
+      <tr><th>Date</th><th>Resume</th><th>Role</th><th>Score</th><th></th></tr>
+      {% for r in reports %}
+      <tr>
+        <td>{{ r.created_at|fmt_date }}</td>
+        <td>{{ r.resume_name }}</td>
+        <td>{{ r.role }}</td>
+        <td><span class="badge {{ 'badge-green' if r.score >= 70 else ('badge-blue' if r.score >= 50 else 'badge-red') }}">{{ r.score }}/100</span></td>
+        <td class="right"><a class="btn btn-small btn-light" href="{{ url_for('ats_report', report_id=r.id) }}">Open</a></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  {% else %}
+  <p class="empty">No reports yet. <a href="{{ url_for('ats') }}">Check your resume</a>.</p>
+  {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+{% block title %}New quiz{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/quiz-setup.css') }}">
+{% endblock %}
+{% block page_title %}Resume quiz{% endblock %}
+{% block page_sub %}Set up your assessment{% endblock %}
+
+{% block content %}
+<div class="setup-layout">
+
+  <form class="box" method="post" action="{{ url_for('quiz_new') }}" enctype="multipart/form-data">
+
+    <div class="field">
+      <span class="label">1. Upload your resume <span class="optional">(optional)</span></span>
+      <input id="resume-file" name="resume" type="file" accept=".pdf,.txt">
+      <p class="help">.pdf or .txt, up to 5 MB. We read the skills in it and ask about those topics first.</p>
+    </div>
+
+    <div class="field">
+      <span class="label">2. Choose your track</span>
+      <div class="track-row">
+        <label class="track">
+          <input type="radio" name="track" value="internship" checked>
+          <strong>Internship</strong>
+          <small>Fundamentals and concepts</small>
+        </label>
+        <label class="track">
+          <input type="radio" name="track" value="experienced">
+          <strong>Experienced</strong>
+          <small>Practical and deeper questions</small>
+        </label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="role">3. Target role</label>
+      <input id="role" name="role" type="text" required placeholder="e.g. Backend Engineer, Data Analyst">
+    </div>
+
+    <div class="field">
+      <span class="label">4. Topics <span class="optional">(leave empty for all)</span></span>
+      <div class="chips">
+        {% for c in categories %}
+        <label><input type="checkbox" name="category" value="{{ c }}" {{ 'checked' if preset.cat == c }}>{{ c }}</label>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="num-questions">5. Number of questions: <span id="num-value">{{ preset.n }}</span></label>
+      <input id="num-questions" name="num_questions" type="range" min="5" max="{{ max_questions }}" step="1" value="{{ [[preset.n, 5]|max, max_questions]|min }}">
+      <p class="help">Choose between 5 and {{ max_questions }}.</p>
+    </div>
+
+    <button type="submit" class="btn btn-full">Start my assessment</button>
+  </form>
+
+  <aside class="box">
+    <h2>How it works</h2>
+    <ol>
+      <li>Pick a track. Internship leans on basics, Experienced on practical questions.</li>
+      <li>Topics found in your resume are asked about first.</li>
+      <li>You get a score, a topic breakdown and an explanation for every answer.</li>
+      <li>Save any question to your notes with one click.</li>
+    </ol>
+  </aside>
+
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<!-- three main cards -->
+<div class="cards">
+  <a class="card-link" href="{{ url_for('quiz_new') }}">
+    <h2>Resume quiz</h2>
+    <p>{{ total_questions }} questions. Upload your resume and test yourself.</p>
+    <span class="figure">{{ stats.quizzes }} taken{% if stats.best_quiz is not none %} &middot; best {{ stats.best_quiz }}%{% endif %}</span>
+  </a>
+
+  <a class="card-link card-teal" href="{{ url_for('ats') }}">
+    <h2>ATS score</h2>
+    <p>See how a hiring system reads your resume.</p>
+    <span class="figure">{% if latest_ats %}Latest score {{ latest_ats.score }}/100{% else %}No report yet{% endif %}</span>
+  </a>
+
+  <a class="card-link card-red" href="{{ url_for('notes') }}">
+    <h2>My notes</h2>
+    <p>Write down what you learn and read it again.</p>
+    <span class="figure">{{ stats.notes }} saved</span>
+  </a>
+</div>
+
+<!-- recent quizzes -->
+<div class="box">
+  <div class="top-row">
+    <h2>Recent quizzes</h2>
+    <a href="{{ url_for('history') }}">See all history</a>
+  </div>
+
+  {% if recent %}
+  <ul class="list">
+    {% for a in recent %}
+    <li>
+      <span class="badge {{ 'badge-green' if a.pct >= 65 else ('badge-blue' if a.pct >= 40 else 'badge-red') }}">{{ a.pct }}%</span>
+      <div class="info">
+        <strong>{{ a.role }}</strong>
+        <small>{{ a.score }}/{{ a.total }} correct &middot; {{ a.created_at|fmt_date }}</small>
+      </div>
+      <a href="{{ url_for('results', attempt_id=a.id) }}">Review</a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="small">You have not taken a quiz yet.</p>
+  {% endif %}
+</div>
+
+{% endblock %}

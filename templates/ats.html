@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+{% block title %}ATS score{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/ats.css') }}">
+{% endblock %}
+{% block page_title %}ATS score{% endblock %}
+{% block page_sub %}See how an Applicant Tracking System reads your resume{% endblock %}
+
+{% block content %}
+<div class="ats-layout">
+
+  <!-- upload form -->
+  <form class="box" method="post" action="{{ url_for('ats') }}" enctype="multipart/form-data">
+    <div class="field">
+      <label for="resume-file">Resume file</label>
+      <input id="resume-file" name="resume" type="file" accept=".pdf,.txt" required>
+      <p class="help">Use a text-based .pdf or a .txt file, up to 5 MB.</p>
+    </div>
+    <div class="field">
+      <label for="role">Target role</label>
+      <input id="role" name="role" type="text" placeholder="e.g. Python Backend Developer">
+    </div>
+    <div class="field">
+      <label for="jd">Job description <span class="optional">(optional)</span></label>
+      <textarea id="jd" name="job_description" rows="6" placeholder="Paste the job post here to match your resume against its exact keywords."></textarea>
+    </div>
+    <button type="submit" class="btn btn-full btn-teal">Check my ATS score</button>
+  </form>
+
+  <aside>
+    <div class="box">
+      <h2>How the 100 points are given</h2>
+      <ul class="points">
+        <li><b>35</b> Keywords for your role</li>
+        <li><b>20</b> Standard sections</li>
+        <li><b>10</b> Contact details</li>
+        <li><b>20</b> Action verbs, numbers, bullets</li>
+        <li><b>15</b> Length and readability</li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <h2>Recent reports</h2>
+      {% if reports %}
+      <ul class="list">
+        {% for r in reports %}
+        <li>
+          <span class="badge {{ 'badge-green' if r.score >= 70 else ('badge-blue' if r.score >= 50 else 'badge-red') }}">{{ r.score }}</span>
+          <a class="info" href="{{ url_for('ats_report', report_id=r.id) }}">
+            <strong>{{ r.role }}</strong>
+            <small>{{ r.resume_name }} &middot; {{ r.created_at|short_date }}</small>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p class="small">No reports yet.</p>
+      {% endif %}
+    </div>
+  </aside>
+
+</div>
+{% endblock %}

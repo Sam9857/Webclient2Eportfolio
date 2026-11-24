@@ -1,0 +1,14 @@
+/* ats.css - ats.html only (upload page) */
+
+.ats-layout { display: flex; gap: 20px; align-items: flex-start; }
+.ats-layout form { flex: 1; }
+.ats-layout aside { width: 320px; }
+
+.points { list-style: none; padding: 0; margin: 0; }
+.points li { margin-bottom: 8px; }
+.points b { display: inline-block; width: 32px; padding: 2px 0; margin-right: 8px; background: var(--teal); color: var(--white); border-radius: 4px; text-align: center; }
+
+@media (max-width: 900px) {
+  .ats-layout { display: block; }
+  .ats-layout aside { width: 100%; }
+}

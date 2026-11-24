@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block title %}Assessment{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/quiz.css') }}">
+{% endblock %}
+{% block page_title %}{{ setup.role }}{% endblock %}
+{% block page_sub %}{{ setup.track|capitalize }} track &middot; {{ questions|length }} questions{% endblock %}
+
+{% block content %}
+
+<!-- progress box (stays at the top while you scroll) -->
+<div class="box progress-box">
+  <div class="row">
+    <strong id="answered-count">0 of {{ questions|length }} answered</strong>
+    {% if setup.skills %}<small>Skills found: {{ setup.skills|join(', ') }}</small>{% endif %}
+  </div>
+  <div class="bar"><div id="progress-fill" style="width: 0"></div></div>
+</div>
+
+<form method="post" action="{{ url_for('quiz') }}" id="quiz-form">
+  {% for q in questions %}
+  <div class="box question">
+    <p class="question-title"><span>{{ loop.index }}.</span> {{ q.question }}</p>
+    <span class="badge">{{ q.category }}</span>
+
+    {% for opt in q.options %}
+    <label class="option">
+      <input type="radio" name="q{{ q.id }}" value="{{ loop.index0 }}">
+      <span class="letter">{{ 'ABCD'[loop.index0] }}.</span> {{ opt }}
+    </label>
+    {% endfor %}
+  </div>
+  {% endfor %}
+
+  <button type="submit" class="btn btn-full">Submit assessment</button>
+</form>
+{% endblock %}

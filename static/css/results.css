@@ -1,0 +1,27 @@
+/* results.css - results.html only */
+
+.score-banner { padding: 24px; margin-bottom: 20px; background: var(--main-dark); color: var(--white); border-radius: 8px; }
+.big-number { font-size: 40px; font-weight: bold; }
+.score-banner small { color: #c7d2fe; }
+.score-banner .btn { margin-top: 12px; background: var(--white); color: var(--main-dark); }
+
+.topic { margin-bottom: 14px; }
+.topic .row { display: flex; justify-content: space-between; margin-bottom: 4px; }
+
+.filters { margin-bottom: 16px; }
+.filters a { display: inline-block; padding: 6px 14px; margin-right: 6px; background: var(--white); border: 1px solid var(--border); border-radius: 20px; color: var(--text); }
+.filters a.active { background: var(--main); border-color: var(--main); color: var(--white); }
+
+.question-right { border-left: 5px solid var(--green); }
+.question-wrong { border-left: 5px solid var(--red); }
+.question-title { margin-bottom: 8px; font-size: 17px; font-weight: bold; }
+.question .badge { margin-bottom: 12px; }
+
+.option { padding: 10px 12px; margin-bottom: 8px; border: 1px solid var(--border); border-radius: 6px; }
+.option.correct { background: #dcfce7; border-color: var(--green); }
+.option.wrong { background: #fee2e2; border-color: var(--red); }
+.letter { font-weight: bold; margin-right: 6px; }
+.tag { float: right; font-size: 12px; font-weight: bold; }
+
+.explanation { margin: 12px 0; padding: 12px; background: #e0f2fe; border-radius: 6px; }
+.not-answered { margin-bottom: 8px; color: var(--red); }
